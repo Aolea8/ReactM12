@@ -93,14 +93,14 @@ const DetailsBanner = ({ video, crew }) => {
                                             >
                                                 <PlayIcon />
                                                 <span className="text">
-                                                    Watch Trailer
+                                                    Ver Trailer
                                                 </span>
                                             </div>
                                         </div>
 
                                         <div className="overview">
                                             <div className="heading">
-                                                Overview
+                                                Descripción
                                             </div>
                                             <div className="description">
                                                 {data.overview}
@@ -111,7 +111,7 @@ const DetailsBanner = ({ video, crew }) => {
                                             {data.status && (
                                                 <div className="infoItem">
                                                     <span className="text bold">
-                                                        Status:{" "}
+                                                        Estado:{" "}
                                                     </span>
                                                     <span className="text">
                                                         {data.status}
@@ -121,7 +121,7 @@ const DetailsBanner = ({ video, crew }) => {
                                             {data.release_date && (
                                                 <div className="infoItem">
                                                     <span className="text bold">
-                                                        Release Date:{" "}
+                                                        Fecha de Lanzamiento:{" "}
                                                     </span>
                                                     <span className="text">
                                                         {dayjs(
@@ -133,7 +133,7 @@ const DetailsBanner = ({ video, crew }) => {
                                             {data.runtime && (
                                                 <div className="infoItem">
                                                     <span className="text bold">
-                                                        Runtime:{" "}
+                                                        Duracion:{" "}
                                                     </span>
                                                     <span className="text">
                                                         {toHoursAndMinutes(
@@ -165,7 +165,7 @@ const DetailsBanner = ({ video, crew }) => {
                                         {writer?.length > 0 && (
                                             <div className="info">
                                                 <span className="text bold">
-                                                    Writer:{" "}
+                                                    Escritor:{" "}
                                                 </span>
                                                 <span className="text">
                                                     {writer?.map((d, i) => (
@@ -183,7 +183,7 @@ const DetailsBanner = ({ video, crew }) => {
                                         {data?.created_by?.length > 0 && (
                                             <div className="info">
                                                 <span className="text bold">
-                                                    Creator:{" "}
+                                                    Creador:{" "}
                                                 </span>
                                                 <span className="text">
                                                     {data?.created_by?.map(

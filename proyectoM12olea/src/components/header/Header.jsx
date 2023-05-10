@@ -81,13 +81,13 @@ const Header = () => {
                         className="menuItem"
                         onClick={() => navigationHandler("movie")}
                     >
-                        Movies
+                        Peliculas
                     </li>
                     <li
                         className="menuItem"
                         onClick={() => navigationHandler("tv")}
                     >
-                        TV Shows
+                        Series
                     </li>
                     <li className="menuItem">
                         <HiOutlineSearch onClick={openSearch} />
@@ -109,7 +109,7 @@ const Header = () => {
                         <div className="searchInput">
                             <input
                                 type="text"
-                                placeholder="Search for a movie or tv show...."
+                                placeholder="Busca tu peli o serie favorita...."
                                 onChange={(e) => setQuery(e.target.value)}
                                 onKeyUp={searchQueryHandler}
                             />

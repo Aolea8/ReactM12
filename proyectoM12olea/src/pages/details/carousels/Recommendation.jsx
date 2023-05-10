@@ -10,7 +10,7 @@ const Recommendation = ({ mediaType, id }) => {
 
     return (
         <Carousel
-            title="Recommendations"
+            title="Recomendaciones"
             data={data?.results}
             loading={loading}
             endpoint={mediaType}
