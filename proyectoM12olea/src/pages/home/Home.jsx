@@ -11,9 +11,9 @@ const Home = () => {
   return (
     <div className='homePage'>
         <HeroBanner/>
-        <Trending/>
         <Popular/>
         <TopRated/>
+        <Trending/>        
     </div>
   )
 };
