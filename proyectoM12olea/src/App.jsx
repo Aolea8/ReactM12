@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { fetchDataFromApi } from "./utils/api";
-
+import "bootstrap-icons/font/bootstrap-icons.css";
 import { useSelector, useDispatch } from "react-redux";
 import { getApiConfiguration, getGenres } from "./store/homeSlice";
 
@@ -12,6 +12,9 @@ import Details from "./pages/details/Details";
 import SearchResult from "./pages/searchResults/SearchResults";
 import Explore from "./pages/explore/Explore";
 import PageNotFound from "./pages/404/PageNotFound";
+
+import LoginRegister from './auth/LoginRegister';
+import { UserContext } from "./userContext";
 
 function App() {
     const dispatch = useDispatch();
@@ -54,8 +57,14 @@ function App() {
 
         dispatch(getGenres(allGenres));
     };
+    let [authToken, setAuthToken] = useState("");
+    let [usuari, setUsuari] = useState("");
+    let [usuariId, setUsuariId] = useState("");
 
     return (
+        <>
+            <UserContext.Provider value= { { usuari, setUsuari,authToken,setAuthToken, usuariId ,setUsuariId }}>
+        <>
         <BrowserRouter>
             <Header />
             <Routes>
@@ -64,9 +73,13 @@ function App() {
                 <Route path="/search/:query" element={<SearchResult />} />
                 <Route path="/explore/:mediaType" element={<Explore />} />
                 <Route path="*" element={<PageNotFound />} />
+                <Route path="/LoginRegister" element={<LoginRegister/>}/> 
             </Routes>
             <Footer />
         </BrowserRouter>
+        </>
+        </UserContext.Provider>
+        </>
     );
 }
 

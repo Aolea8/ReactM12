@@ -92,6 +92,11 @@ const Header = () => {
                     <li className="menuItem">
                         <HiOutlineSearch onClick={openSearch} />
                     </li>
+                    <li className="menuItem">
+                        <i class="bi bi-person"
+                        onClick={() => navigate("/LoginRegister")}
+                        ></i>
+                    </li>
                 </ul>
 
                 <div className="mobileMenuItems">
