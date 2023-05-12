@@ -8,13 +8,22 @@ const Recommendation = ({ mediaType, id }) => {
         `/${mediaType}/${id}/recommendations`
     );
 
-    return (
-        <Carousel
-            title="Recomendaciones"
-            data={data?.results}
-            loading={loading}
-            endpoint={mediaType}
-        />
+    
+    return (<>
+    
+            <>
+                {data?.results.length === 0 ? (
+                    <></>
+                ) : (
+                    <Carousel
+                    title="Recomendaciones"
+                    data={data?.results}
+                    endpoint={mediaType}
+                    />
+                )}
+            </>
+        </>
+        
     );
 };
 

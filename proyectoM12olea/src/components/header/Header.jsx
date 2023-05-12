@@ -96,6 +96,15 @@ const Header = () => {
                         <i class="bi bi-person"
                         onClick={() => navigate("/LoginRegister")}
                         ></i>
+                        <div class="submenu">
+						<div class="submenu-items">
+							<ul>
+								<li><a href="#">Favoritos</a></li>
+								<li><a href="#">Guardados</a></li>
+								<li><a href="#">Log Out</a></li>
+							</ul>
+						</div>
+                        </div>
                     </li>
                 </ul>
 
@@ -118,7 +127,7 @@ const Header = () => {
                                 onChange={(e) => setQuery(e.target.value)}
                                 onKeyUp={searchQueryHandler}
                             />
-                            <VscChromeClose
+                            <VscChromeClose className="x-blue"
                                 onClick={() => setShowSearch(false)}
                             />
                         </div>

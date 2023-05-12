@@ -56,11 +56,11 @@ const SearchResult = () => {
                     {data?.results?.length > 0 ? (
                         <>
                             <div className="pageTitle">
-                                {`Search ${
+                                {`Busqueda de ${
                                     data?.total_results > 1
-                                        ? "results"
-                                        : "result"
-                                } of '${query}'`}
+                                        ? "resultados"
+                                        : "resultado"
+                                } de '${query}'`}
                             </div>
                             <InfiniteScroll
                                 className="content"
@@ -83,7 +83,7 @@ const SearchResult = () => {
                         </>
                     ) : (
                         <span className="resultNotFound">
-                            Sorry, Results not found!
+                            Lo siento, no hemos encontrado nada!
                         </span>
                     )}
                 </ContentWrapper>

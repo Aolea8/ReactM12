@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState,useEffect, useContext } from "react";
+import { UserContext } from "../../../userContext";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import dayjs from "dayjs";
 
 import "./style.scss";
@@ -13,14 +14,16 @@ import Img from "../../../components/lazyLoadImage/Img.jsx";
 import PosterFallback from "../../../assets/no-poster.png";
 import { PlayIcon } from "../Playbtn";
 import VideoPopup from "../../../components/videoPopup/VideoPopup";
+import { favorite, unfavorite, comprobarFavorito } from "../../../store/favorites/thunks";
 
 const DetailsBanner = ({ video, crew }) => {
     const [show, setShow] = useState(false);
     const [videoId, setVideoId] = useState(null);
-
+    const { favorito } = useSelector((state) => state.favorite);
     const { mediaType, id } = useParams();
     const { data, loading } = useFetch(`/${mediaType}/${id}`);
-
+    const dispatch = useDispatch();
+    let { authToken, setAuthToken, usuari, setUsuari } = useContext(UserContext);
     const { url } = useSelector((state) => state.home);
 
     const _genres = data?.genres?.map((g) => g.id);
@@ -35,7 +38,10 @@ const DetailsBanner = ({ video, crew }) => {
         const minutes = totalMinutes % 60;
         return `${hours}h${minutes > 0 ? ` ${minutes}m` : ""}`;
     };
-
+    useEffect(()=>{
+        dispatch(comprobarFavorito(id, authToken));
+      }, []);
+    
     return (
         <div className="detailsBanner">
             {!loading ? (
@@ -50,6 +56,7 @@ const DetailsBanner = ({ video, crew }) => {
                                 <div className="content">
                                     <div className="left">
                                         {data.poster_path ? (
+                                            <div className="container">
                                             <Img
                                                 className="posterImg"
                                                 src={
@@ -57,12 +64,33 @@ const DetailsBanner = ({ video, crew }) => {
                                                     data.poster_path
                                                 }
                                             />
+                                            
+                                            {authToken ? (
+                                                !favorito ? (
+                                                    <button onClick={(e) => {dispatch(favorite(id, authToken));}}>
+                                                    <i className="bi bi-star"></i>
+                                                    </button>
+                                                ) : (
+                                                    <button onClick={(e) => {dispatch(unfavorite(id, authToken));}}>
+                                                    <i className="bi bi-star-fill"></i>
+                                                    </button>
+                                                )
+                                            ) : (
+                                                <></>
+                                            )}
+
+                                            </div>
                                         ) : (
+                                            
                                             <Img
                                                 className="posterImg"
                                                 src={PosterFallback}
+                                                
                                             />
+                                            
+                                            
                                         )}
+                                        
                                     </div>
                                     <div className="right">
                                         <div className="title">

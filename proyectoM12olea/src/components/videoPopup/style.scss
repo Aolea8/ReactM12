@@ -36,6 +36,9 @@
             color: white;
             cursor: pointer;
         }
+        .closeBtn:hover{
+            color: var(--cielo);
+        }
     }
     &.visible {
         opacity: 1;

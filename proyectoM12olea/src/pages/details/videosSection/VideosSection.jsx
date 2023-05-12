@@ -20,40 +20,47 @@ const VideosSection = ({ data, loading }) => {
             </div>
         );
     };
+    console.log(data);
 
     return (
         <div className="videosSection">
             <ContentWrapper>
-                <div className="sectionHeading">Videos Officiales</div>
-                {!loading ? (
-                    <div className="videos">
-                        {data?.results?.map((video) => (
+                <>
+                {data?.results.length === 0 ? (
+                    <></>
+                    ) : (
+                    <>
+                        <div className="sectionHeading">Videos Officiales</div>
+                        {loading ? (
+                        <div className="videoSkeleton">
+                            {loadingSkeleton()}
+                            {loadingSkeleton()}
+                            {loadingSkeleton()}
+                            {loadingSkeleton()}
+                        </div>
+                        ) : (
+                        <div className="videos">
+                            {data?.results?.map((video) => (
                             <div
                                 key={video.id}
                                 className="videoItem"
                                 onClick={() => {
-                                    setVideoId(video.key);
-                                    setShow(true);
+                                setVideoId(video.key);
+                                setShow(true);
                                 }}
                             >
                                 <div className="videoThumbnail">
-                                    <Img
-                                        src={`https://img.youtube.com/vi/${video.key}/mqdefault.jpg`}
-                                    />
-                                    <PlayIcon />
+                                <Img src={`https://img.youtube.com/vi/${video.key}/mqdefault.jpg`} />
+                                <PlayIcon />
                                 </div>
                                 <div className="videoTitle">{video.name}</div>
                             </div>
-                        ))}
-                    </div>
-                ) : (
-                    <div className="videoSkeleton">
-                        {loadingSkeleton()}
-                        {loadingSkeleton()}
-                        {loadingSkeleton()}
-                        {loadingSkeleton()}
-                    </div>
-                )}
+                            ))}
+                        </div>
+                        )}
+                    </>
+                    )}
+                </>
             </ContentWrapper>
             <VideoPopup
                 show={show}

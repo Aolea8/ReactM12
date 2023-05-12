@@ -19,7 +19,7 @@ const Trending = () => {
         <div className="carouselSection">
             <ContentWrapper>
                 <span className="carouselTitle">Tendencia</span>
-                <SwitchTabs data={["Dia", "Semana"]} onTabChange={onTabChange} />
+                <SwitchTabs data={["Día", "Semana"]} onTabChange={onTabChange} />
             </ContentWrapper>
             <Carousel data={data?.results} loading={loading} />
         </div>
