@@ -14,6 +14,7 @@ import Explore from "./pages/explore/Explore";
 import PageNotFound from "./pages/404/PageNotFound";
 
 import LoginRegister from './auth/LoginRegister';
+import Favoritos from './pages/favoritos/Favoritos';
 import { UserContext } from "./userContext";
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
                 <Route path="/explore/:mediaType" element={<Explore />} />
                 <Route path="*" element={<PageNotFound />} />
                 <Route path="/LoginRegister" element={<LoginRegister/>}/> 
+                <Route path="/Favoritos" element={<Favoritos/>}/> 
             </Routes>
             <Footer />
         </BrowserRouter>

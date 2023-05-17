@@ -14,24 +14,29 @@ import Spinner from "../../components/spinner/Spinner";
 let filters = {};
 
 
-const Explore = () => {
+const Favoritos = () => {
     const [data, setData] = useState(null);
     const [pageNum, setPageNum] = useState(1);
     const [loading, setLoading] = useState(false);
     const [genre, setGenre] = useState(null);
-    const { mediaType } = useParams();
+    const [mediaType, setMediaType] = useState("movie");
 
     const { data: genresData } = useFetch(`/genre/${mediaType}/list`);
 
     const fetchInitialData = () => {
         setLoading(true);
         fetchDataFromApi(`/discover/${mediaType}`, filters).then((res) => {
-            setData(res);
-            setPageNum((prev) => prev + 1);
-            setLoading(false);
+          console.log(res);
+          const idsToFilter = useFetch(`/genre/${mediaType}/list`);
+          const filteredData = res.results.filter((item) => idsToFilter.includes(item.id.toString()));
+          setData(filteredData);
+          console.log(filteredData);
+          setLoading(false);
         });
-    };
-
+      };
+      
+      
+    
     const fetchNextPageData = () => {
         fetchDataFromApi(
             `/discover/${mediaType}?page=${pageNum}`,
@@ -75,12 +80,13 @@ const Explore = () => {
         setPageNum(1);
         fetchInitialData();
     };
-
+    
     return (
         <div className="explorePage">
             <ContentWrapper>
                 <div className="pageHeader">
                     <div className="pageTitle">
+                        
                         {mediaType === "tv"
                             ? "Explora Series"
                             : "Explora Peliculas"}
@@ -105,7 +111,7 @@ const Explore = () => {
                 {loading && <Spinner initial={true} />}
                 {!loading && (
                     <>
-                        {data?.results?.length > 0 ? (
+                        {data?.length > 0 ? (
                             <InfiniteScroll
                                 className="content"
                                 dataLength={data?.results?.length || []}
@@ -113,7 +119,7 @@ const Explore = () => {
                                 hasMore={pageNum <= data?.total_pages}
                                 loader={<Spinner />}
                             >
-                                {data?.results?.map((item, index) => {
+                                {data?.map((item, index) => {
                                     if (item.media_type === "person") return;
                                     return (
                                         <MovieCard
@@ -136,4 +142,4 @@ const Explore = () => {
     );
 };
 
-export default Explore;
+export default Favoritos;

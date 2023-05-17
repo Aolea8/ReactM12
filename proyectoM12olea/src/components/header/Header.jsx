@@ -99,9 +99,9 @@ const Header = () => {
                         <div class="submenu">
 						<div class="submenu-items">
 							<ul>
-								<li><a href="#">Favoritos</a></li>
+								<li><a  href="/Favoritos">Favoritos</a></li>
 								<li><a href="#">Guardados</a></li>
-								<li><a href="#">Log Out</a></li>
+								<li><a href="#">Log Out<i class="bi bi-box-arrow-right"></i></a></li>
 							</ul>
 						</div>
                         </div>
