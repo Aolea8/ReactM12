@@ -4,6 +4,9 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Select from "react-select";
 
 import "./style.scss";
+import { UserContext } from "../../userContext";
+import { useContext } from "react";
+
 
 import useFetch from "../../hooks/useFetch";
 import { fetchDataFromApi } from "../../utils/api";
@@ -15,6 +18,7 @@ let filters = {};
 
 
 const Favoritos = () => {
+    let { authToken, setAuthToken } = useContext(UserContext);
     const [data, setData] = useState(null);
     const [pageNum, setPageNum] = useState(1);
     const [loading, setLoading] = useState(false);
@@ -22,18 +26,45 @@ const Favoritos = () => {
     const [mediaType, setMediaType] = useState("movie");
 
     const { data: genresData } = useFetch(`/genre/${mediaType}/list`);
+    const [idsToFilter, setIdsToFilter] = useState([]);
+    const getIds = async () => {
+        try {
+            const data = await fetch("http://127.0.0.1:8000/api/user/favorites", {
+                headers: {
+                    'Accept': 'application/json',
+                    Authorization: "Bearer " + authToken
+                },
+                method: "GET"
+            });
+            const resposta = await data.json();
+            if (resposta.success === true) {
+                const ids = resposta.data.map(item => item.id_peliserie);
+                console.log(ids)
+                setIdsToFilter(ids);
+                fetchInitialData();
+            } else {
+                console.log(resposta.message);
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    };
+    
 
     const fetchInitialData = () => {
         setLoading(true);
         fetchDataFromApi(`/discover/${mediaType}`, filters).then((res) => {
-          console.log(res);
-          const idsToFilter = useFetch(`/genre/${mediaType}/list`);
-          const filteredData = res.results.filter((item) => idsToFilter.includes(item.id.toString()));
+          const filteredData = res.results.filter((item) => idsToFilter.includes(item.id));
+          console.log(filteredData)
           setData(filteredData);
-          console.log(filteredData);
           setLoading(false);
         });
       };
+      useEffect(() => {
+        if (idsToFilter) {
+            fetchInitialData();
+        }
+    }, [idsToFilter]);
       
       
     
@@ -60,6 +91,7 @@ const Favoritos = () => {
         setData(null);
         setPageNum(1);
         setGenre(null);
+        getIds();
         fetchInitialData();
     }, [mediaType]);
 

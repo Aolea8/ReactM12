@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import { SlMenu } from "react-icons/sl";
 import { VscChromeClose } from "react-icons/vsc";
 import { useNavigate, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "./style.scss";
 
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 import logo from "../../assets/logo.png";
+import { UserContext } from "../../userContext";
 
 const Header = () => {
+    let { authToken, setAuthToken } =useContext(UserContext);
     const [show, setShow] = useState("top");
     const [lastScrollY, setLastScrollY] = useState(0);
     const [mobileMenu, setMobileMenu] = useState(false);
@@ -70,6 +73,29 @@ const Header = () => {
         setMobileMenu(false);
     };
 
+    const handleLogout = () => {
+        fetch('http://127.0.0.1:8000/api/logout', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              Authorization: "Bearer " + authToken
+            },
+          })
+            .then(response => {
+              if (response.ok) {
+                console.log('Sesión cerrada exitosamente');
+              } else {
+                console.error('Error al cerrar la sesión');
+              }
+            })
+            .catch(error => {
+              console.error('Error de red:', error);
+            });
+        
+        console.log('Cerrar sesión del usuario');
+    };
+
     return (
         <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
             <ContentWrapper>
@@ -99,9 +125,8 @@ const Header = () => {
                         <div class="submenu">
 						<div class="submenu-items">
 							<ul>
-								<li><a  href="/Favoritos">Favoritos</a></li>
-								<li><a href="#">Guardados</a></li>
-								<li><a href="#">Log Out<i class="bi bi-box-arrow-right"></i></a></li>
+								<li><Link  to="/Favoritos">Favoritos</Link></li>
+								<li><a onClick={handleLogout}>Log Out<i class="bi bi-box-arrow-right"></i></a></li>
 							</ul>
 						</div>
                         </div>
