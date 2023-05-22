@@ -74,7 +74,7 @@ const Header = () => {
     };
 
     const handleLogout = () => {
-        fetch('http//equip07.insjoaquimmir.cat/api/logout', {
+        fetch('http://equip07.insjoaquimmir.cat/api/logout', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

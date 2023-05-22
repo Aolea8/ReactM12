@@ -52,7 +52,7 @@ export default function Register({ setLogin }) {
     // }
 
 
-    fetch("http//equip07.insjoaquimmir.cat/api/register", {
+    fetch("http://equip07.insjoaquimmir.cat/api/register", {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
