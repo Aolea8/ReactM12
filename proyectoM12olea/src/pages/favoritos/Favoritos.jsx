@@ -29,7 +29,7 @@ const Favoritos = () => {
     const [idsToFilter, setIdsToFilter] = useState([]);
     const getIds = async () => {
         try {
-            const data = await fetch("http://127.0.0.1:8000/api/user/favorites", {
+            const data = await fetch("http//equip07.insjoaquimmir.cat/api/user/favorites", {
                 headers: {
                     'Accept': 'application/json',
                     Authorization: "Bearer " + authToken

@@ -17,7 +17,7 @@ export const useLogin = () => {
             console.log(localAuthToken)
             if (localAuthToken) {
 
-                const data = await fetch("http://127.0.0.1:8000/api/user", {
+                const data = await fetch("http//equip07.insjoaquimmir.cat/api/user", {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json",
@@ -47,7 +47,7 @@ export const useLogin = () => {
     const doLogin = async (formState) => {
         //setError("");   
         try {
-            const data = await fetch("http://127.0.0.1:8000/api/login", {
+            const data = await fetch("http//equip07.insjoaquimmir.cat/api/login", {
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json"

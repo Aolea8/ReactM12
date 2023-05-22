@@ -10,7 +10,7 @@ export const favorite = (id, authToken) => {
             },
             method: "POST", 
         };
-        const url = "http://127.0.0.1:8000/api/favorite/"+id;
+        const url = "http//equip07.insjoaquimmir.cat/api/favorite/"+id;
         try {
             const data = await fetch(url, headers);
             const resposta = await data.json();
@@ -36,7 +36,7 @@ export const unfavorite = (id, authToken) => {
             },
             method: "DELETE", 
         };
-        const url = "http://127.0.0.1:8000/api/unfavorite/"+id;
+        const url = "http//equip07.insjoaquimmir.cat/api/unfavorite/"+id;
         try {
             const data = await fetch(url, headers);
             const resposta = await data.json();
@@ -62,7 +62,7 @@ export const comprobarFavorito = (id, authToken) => {
             },
             method: "POST", 
         };
-        const url = "http://127.0.0.1:8000/api/favorite/"+id;
+        const url = "http//equip07.insjoaquimmir.cat/api/favorite/"+id;
         try {
             const data = await fetch(url, headers);
             const resposta = await data.json();
