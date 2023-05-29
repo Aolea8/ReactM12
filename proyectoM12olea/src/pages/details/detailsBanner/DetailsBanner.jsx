@@ -25,7 +25,7 @@ const DetailsBanner = ({ video, crew }) => {
     const dispatch = useDispatch();
     let { authToken, setAuthToken, usuari, setUsuari } = useContext(UserContext);
     const { url } = useSelector((state) => state.home);
-
+    
     const _genres = data?.genres?.map((g) => g.id);
 
     const director = crew?.filter((f) => f.job === "Director");
@@ -57,6 +57,7 @@ const DetailsBanner = ({ video, crew }) => {
                                     <div className="left">
                                         {data.poster_path ? (
                                             <div className="container">
+                                                
                                             <Img
                                                 className="posterImg"
                                                 src={
@@ -64,7 +65,23 @@ const DetailsBanner = ({ video, crew }) => {
                                                     data.poster_path
                                                 }
                                             />
-                                            
+                                        {authToken ? (
+                                            <div
+                                                className="playbtn"
+                                                onClick={() => {
+                                                    setShow(true);
+                                                    setVideoId(pelicula);
+                                                }}
+                                            >
+                                                <PlayIcon />
+                                                <span className="reproducir">
+                                                    <i class="bi bi-play"></i>
+                                                </span>
+                                            </div>
+                                         ) : (
+                                            <></>
+                                        )}
+                                                                                         
                                             {authToken ? (
                                                 !favorito ? (
                                                     <button onClick={(e) => {dispatch(favorite(id, authToken));}}>
@@ -78,6 +95,7 @@ const DetailsBanner = ({ video, crew }) => {
                                             ) : (
                                                 <></>
                                             )}
+                                            
 
                                             </div>
                                         ) : (
@@ -92,6 +110,7 @@ const DetailsBanner = ({ video, crew }) => {
                                         )}
                                         
                                     </div>
+                                    
                                     <div className="right">
                                         <div className="title">
                                             {`${

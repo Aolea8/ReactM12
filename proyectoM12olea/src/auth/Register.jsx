@@ -66,7 +66,8 @@ export default function Register({ setLogin }) {
         console.log(resposta);
         if (resposta.success === true) {
           alert(resposta.authToken);
-          setAuthToken(resposta.authToken)
+          setAuthToken(resposta.authToken);
+          localStorage.setItem("authToken",resposta.authToken);
           navigate("/");
         }
         else {

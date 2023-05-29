@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 export const useLogin = () => {
     const [error, setError] = useState("");
     const navigate = useNavigate();
-    let { setAuthToken,setUsuariId } = useContext(UserContext);
+    let { setAuthToken,setUsuariId,setUsuari } = useContext(UserContext);
     // localStorage = window.localStorage;
 
 
@@ -26,12 +26,11 @@ export const useLogin = () => {
                     method: "GET",
                 });
                 const resposta =  await data.json();
-                console.log(resposta)
 
                 if (resposta.success) {
-                    setAuthToken(localAuthToken)
-                    console.log(resposta.user.id)
-                    setUsuariId(resposta.user.id)
+                    setAuthToken(localAuthToken);
+                    setUsuariId(resposta.user.id);
+                    setUsuari(resposta.user.email);
                     navigate("/");
                 } else {
                     console.log("INVALID local storage auth token")
