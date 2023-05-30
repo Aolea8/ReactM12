@@ -3,6 +3,8 @@
     border-radius: 5px;
     max-width: 500px;
     margin: 0 auto;
+    color: white;
+    
   }
   
   .success {
@@ -15,6 +17,7 @@
   h1 {
     font-size: 24px;
     margin-bottom: 20px;
+    
   }
   
   .material-form {
@@ -91,6 +94,7 @@
     border-radius: 5px;
     border: none;
     cursor: pointer;
+    color: white;
   }
   
   .central {

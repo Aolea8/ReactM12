@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import dayjs from "dayjs";
 
+
 import "./style.scss";
 
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
@@ -14,17 +15,29 @@ import Img from "../../../components/lazyLoadImage/Img.jsx";
 import PosterFallback from "../../../assets/no-poster.png";
 import { PlayIcon } from "../Playbtn";
 import VideoPopup from "../../../components/videoPopup/VideoPopup";
+import PeliPopup from "../../../components/videoPopup/PeliPopup";
 import { favorite, unfavorite, comprobarFavorito } from "../../../store/favorites/thunks";
 
 const DetailsBanner = ({ video, crew }) => {
     const [show, setShow] = useState(false);
     const [videoId, setVideoId] = useState(null);
+    const [show2, setShow2] = useState(false);
+    const [videoId2, setVideoId2] = useState(null);
     const { favorito } = useSelector((state) => state.favorite);
     const { mediaType, id } = useParams();
     const { data, loading } = useFetch(`/${mediaType}/${id}`);
     const dispatch = useDispatch();
     let { authToken, setAuthToken, usuari, setUsuari } = useContext(UserContext);
     const { url } = useSelector((state) => state.home);
+    
+    const [isOpen, setIsOpen] = useState(false);
+    const openModal = () => {
+        setIsOpen(true);
+      };
+    
+      const closeModal = () => {
+        setIsOpen(false);
+      };
     
     const _genres = data?.genres?.map((g) => g.id);
 
@@ -69,8 +82,8 @@ const DetailsBanner = ({ video, crew }) => {
                                             <div
                                                 className="playbtn"
                                                 onClick={() => {
-                                                    setShow(true);
-                                                    setVideoId(pelicula);
+                                                    setShow2(true);
+                                                    setVideoId2(id);
                                                 }}
                                             >
                                                 <PlayIcon />
@@ -255,6 +268,12 @@ const DetailsBanner = ({ video, crew }) => {
                                     setShow={setShow}
                                     videoId={videoId}
                                     setVideoId={setVideoId}
+                                />
+                                <PeliPopup
+                                    show={show2}
+                                    setShow={setShow2}
+                                    videoId={videoId2}
+                                    setVideoId={setVideoId2}
                                 />
                             </ContentWrapper>
                         </React.Fragment>
