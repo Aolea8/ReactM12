@@ -40,7 +40,7 @@ const PeliPopup = ({ show, setShow, videoId, setVideoId }) => {
             </span>
             {videoURL != null && (
               <video ref={videoRef} controls autoPlay>
-                <source src={`${videoURL}`} type="video/mp4" />
+                <source src={`http://client07.insjoaquimmir.cat/${videoURL}`} type="video/mp4" />
               </video>
             )}
           </div>
